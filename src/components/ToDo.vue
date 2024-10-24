@@ -1,11 +1,11 @@
 <template lang="">
   <div>
-    <li @click="check">
+    <li @click.self="check">
       <label>
         <input type="checkbox" :checked="todo.isDone" @change="check" />
         <span>{{ todo.title }}</span>
       </label>
-      <button class="btn btn-danger" @click.stop="del">删除</button>
+      <button class="btn btn-danger" @click="del">删除</button>
     </li>
   </div>
 </template>

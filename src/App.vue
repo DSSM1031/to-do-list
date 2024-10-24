@@ -28,8 +28,16 @@ export default {
   },
   data() {
     return {
-      todos: [],
+      todos: JSON.parse(localStorage.getItem("todos")) || [],
     };
+  },
+  watch: {
+    todos: {
+      handler() {
+        localStorage.setItem("todos", JSON.stringify(this.todos));
+      },
+      deep: true,
+    },
   },
   methods: {
     add(todoObj) {
