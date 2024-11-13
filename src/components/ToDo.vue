@@ -1,67 +1,71 @@
 <template lang="">
-  <div>
+	<div>
     <li @click.self="check">
       <label>
         <input type="checkbox" :checked="todo.isDone" @change="check" />
-        <span>{{ todo.title }}</span>
-      </label>
-      <button class="btn btn-danger" @click="del">删除</button>
-    </li>
-  </div>
+        <span>{{
+		todo.title
+	}}</span>
+       </label>
+       <button class="btn btn-danger" @click="del">删除</button>
+     </li>
+   </div>
 </template>
+
 <script>
 export default {
-  props: ["todo", "checkThis", "delThis"],
+  props: ["todo"],
   methods: {
     check() {
-      this.checkThis(this.todo);
+      this.$bus.$emit("checked", this.todo)
     },
     del() {
-      this.delThis(this.todo);
+      this.$bus.$emit("del", this.todo)
     },
   },
 };
 </script>
+
 <style scoped>
 li {
-  list-style: none;
-  height: 36px;
-  line-height: 36px;
-  padding: 0 5px;
-  border-bottom: 1px solid #ddd;
+    list-style: none;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 5px;
+    border-bottom: 1px solid #ddd;
 }
 
 li label {
-  float: left;
-  cursor: pointer;
+    float: left;
+    cursor: pointer;
 }
 
 li label li input {
-  vertical-align: middle;
-  margin-right: 6px;
-  position: relative;
-  top: -1px;
+    vertical-align: middle;
+    margin-right: 6px;
+    position: relative;
+    top: -1px;
 }
 
 li button {
-  float: right;
-  display: none;
-  margin-top: 3px;
+    float: right;
+    display: none;
+    margin-top: 3px;
 }
 
 li:before {
-  content: initial;
+    content: initial;
 }
 
 li:last-child {
-  border-bottom: none;
+    border-bottom: none;
 }
 
 li:hover {
-  background-color: #d5d5d5;
+    background-color: #d5d5d5;
 }
 
 li:hover button {
-  display: block;
+    display: block;
 }
 </style>
